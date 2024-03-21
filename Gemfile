@@ -37,10 +37,22 @@ gem "rack-cors"
 gem 'jwt', "~> 2.5"
 gem 'active_model_serializers', "~> 0.10.12"
 gem 'video_info'
+gem "grape"
+gem "grape-active_model_serializers"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
+  gem 'database_cleaner'
+  gem 'vcr'
+  gem 'webmock'
+  gem 'rspec_junit_formatter'
+  gem 'cucumber-rails', require: false
+  gem 'webdrivers', '4.6.0'
+  gem 'capybara'
+  gem 'capybara-select-2'
+  gem 'climate_control'
+  gem 'shoulda-matchers'
 end
 
 group :development do
@@ -48,5 +60,11 @@ group :development do
   # gem "spring"
 
   gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
+  gem 'byebug'
+  gem 'pry-rails'
+  gem 'looksee'
+  gem 'faker'
 end
 
