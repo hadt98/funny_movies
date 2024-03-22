@@ -4,9 +4,9 @@ module API
 
       include JsonWebToken
       def authenticate_request!
-        header = request.headers["Authorization"] || request.headers["authorization"]
-        header = header.split(" ").last if header
-        decoded, ok = jwt_decode(header)
+        token = request.headers["Authorization"] || request.headers["authorization"]
+        jwt = header.split(" ").last if token
+        decoded, ok = jwt_decode(jwt)
         unless ok
           if decoded.nil?
             error!("token missing", 401)

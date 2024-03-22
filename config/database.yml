@@ -24,9 +24,9 @@ default: &default
 development:
   <<: *default
 #  database: invoiced_development
-  url: postgresql://postgres:123123@localhost/invoiced_dev
+  url: <%= ENV['DATABASE_URL']&.gsub('?', '_dev?') || 'postgresql://postgres:123123@localhost/invoiced_dev' %>
 test: &test
-  url: postgresql://postgres:123123@localhost/invoiced_test
+  url: <%= ENV['DATABASE_URL']&.gsub('?', '_test?') || 'postgresql://postgres:123123@localhost/invoiced_test' %>
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.

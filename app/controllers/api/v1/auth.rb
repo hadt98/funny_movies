@@ -22,10 +22,9 @@ module API
           requires :password, type: String
         end
         post :login do
-          declared_params = declared(params, include_missing: false)
 
-          user = User.find_by_email(declared_params[:email])
-          error!("wrong password or email", 401) unless user&.authenticate(declared_params[:password])
+          user = User.find_by_email(params[:email])
+          error!("wrong password or email", 401) unless user&.authenticate(params[:password])
           jwt_encode(user_id: user.id)
         end
 

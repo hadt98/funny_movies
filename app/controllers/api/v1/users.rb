@@ -6,11 +6,6 @@ module API
       end
 
       namespace :users do
-        post "" do
-          {
-            message: "success"
-          }
-        end
       end
     end
   end

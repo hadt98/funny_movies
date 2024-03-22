@@ -47,13 +47,4 @@ RSpec.describe API::V1::Auth, type: :request do
     end
   end
 
-
-  describe "test hoy" do
-    it "test " do
-      post_with_token "/api/v1/users"
-      puts json_body
-      puts status
-    end
-
-  end
 end
