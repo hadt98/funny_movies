@@ -4,6 +4,4 @@
 #
 # Example:
 #
-%w[like dislike].each do |icon|
-  Icon.find_or_create_by!(code: icon, symbol: icon)
-end
+

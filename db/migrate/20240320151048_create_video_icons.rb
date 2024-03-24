@@ -3,7 +3,6 @@ class CreateVideoIcons < ActiveRecord::Migration[7.1]
     create_table :video_icons do |t|
       t.references :video
       t.string 'code'
-      t.string 'count'
       t.references :user
       t.timestamps
     end

@@ -124,6 +124,43 @@ RSpec.describe API::V1::Auth, type: :request do
 
   end
 
+  describe "POST /add_reaction" do
+    context "add reaction to video" do
+      it "return success" do
+        user = create(:user)
+        stub_youtube_data
+        video = create(:video, user: user)
+        post_with_token "/api/v1/videos/#{video["id"]}/add_reaction", body: { icon: 'like' }, user: user
+        expect(response.status).to eq(201)
+        expect(json_body["video_id"]).to eq video.id
+        expect(json_body["user_id"]).to eq user.id
+        expect(json_body["code"]).to eq 'like'
+
+      end
+    end
+    context "unauthenticated user" do
+      it "return error" do
+        user = create(:user)
+        stub_youtube_data
+        video = create(:video, user: user)
+        post_without_token "/api/v1/videos/#{video["id"]}/add_reaction", body: { icon: 'like' }
+        expect(response.status).to eq(401)
+
+      end
+    end
+
+    context "unsupported reaction" do
+      it "return error" do
+        user = create(:user)
+        stub_youtube_data
+        video = create(:video, user: user)
+        post_with_token "/api/v1/videos/#{video["id"]}/add_reaction", body: { icon: 'love' }, user: user
+        expect(response.status).to eq(400)
+      end
+    end
+
+  end
+
   def stub_youtube_data(video_id: SecureRandom.uuid)
     data = [{
               video_id: video_id,

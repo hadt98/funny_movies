@@ -59,42 +59,21 @@ module API::V1
       params do
         requires :id, type: Integer
         requires :icon, type: String
-        requires :total, type: Integer
       end
-      post ":id/add" do
-
+      post ":id/add_reaction" do
         declared_params = declared(params, include_missing: false)
         video = Video.where(id: declared_params[:id], user_id: @current_user[:id]).first
         if video.nil?
           error!("video not found", 400)
         end
         p video
-        rs, ok = video.add_reaction(declared_params[:icon], declared_params[:total], "add")
+        rs, ok = video.add_reaction(@current_user, declared_params[:icon])
         unless ok
           error!(rs, 400)
         end
         return rs
       end
 
-      desc "remove reaction to video"
-      params do
-        requires :id, type: Integer
-        requires :icon, type: String
-        requires :total, type: Integer
-      end
-      post ":id/remove" do
-
-        declared_params = declared(params, include_missing: false)
-        video = Video.by_id(declared_params["id"]).by_owner(@current_user["id"])
-        if video.nil?
-          error!("video not found", 400)
-        end
-        rs, ok = video.add_reaction(declared_params[:icon], declared_params[:total], "substract")
-        unless ok
-          error!(rs, 400)
-        end
-        return rs
-      end
     end
 
   end
