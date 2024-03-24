@@ -68,7 +68,7 @@ RSpec.describe API::V1::Auth, type: :request do
         expect(json_body["total_count"]).to eq 4
         expect(json_body["data"][0]).to include(
                                           "id" => video[:id],
-                                          "user_id" => user1[:id],
+                                          "owner" => user1[:email],
                                           "title" => "title",
                                           "description" => "description"
                                         )
@@ -99,7 +99,7 @@ RSpec.describe API::V1::Auth, type: :request do
         expect(array).to include(name: "Alice", age: 30)
         expect(json_body["data"][0]).to include(
                                           "id" => video1[:id],
-                                          "user_id" => user1[:id],
+                                          "owner" => user1[:email],
                                           "title" => "title",
                                           "description" => "description"
                                         )

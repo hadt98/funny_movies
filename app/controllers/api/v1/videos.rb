@@ -3,9 +3,10 @@ module API::V1
     helpers do
       def paging(domain, page = 1, per_page = 10, order_by = 'created_at', order_dir = 'desc')
         domain = domain.order("#{order_by} #{order_dir}").offset((page - 1) * per_page).limit(per_page)
+        data = ActiveModelSerializers::SerializableResource.new(domain, each_serializer: VideoSerializer)
         {
           total_count: domain.count,
-          data: domain
+          data: data
         }
 
       end
