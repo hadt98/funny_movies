@@ -10,6 +10,7 @@ module API::V1
 
       end
     end
+
     namespace :public do
       desc "get list videos public by all users"
       params do
@@ -49,13 +50,14 @@ module API::V1
       end
       get "/youtube_info" do
         declared_params = declared(params, include_missing: false)
-        data, ok = Video.get_video(declared_params[:url])
+        youtube_client = YoutubeClient.new
+
+        data, ok = youtube_client.get_video_info_by_link(declared_params[:url])
         unless ok
           error!("invalid video", 400)
         end
         data
       end
-
 
       desc "create a video by link"
       params do

@@ -164,12 +164,11 @@ RSpec.describe API::V1::Auth, type: :request do
     context "get video from a link" do
       it "return success" do
         user = create(:user)
+        link = 'https://www.youtube.com/watch?v=99uabJJUFX4'
         stub_youtube_data
-        get_with_token("/api/v1/videos/youtube_info", user: user)
+        get_with_token("/api/v1/videos/youtube_info", user: user, params: {url: link})
         expect(response.status).to eq(200)
         expect(json_body).to include(
-                                          "id" => video[:id],
-                                          "user_id" => user1[:id],
                                           "title" => "title",
                                           "description" => "description"
                                         )
