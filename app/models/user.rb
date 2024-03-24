@@ -8,7 +8,4 @@ class User < ApplicationRecord
   has_many :videos
   has_many :video_icons
 
-  def gen_jwt(email, password)
-
-  end
 end
