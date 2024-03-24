@@ -1,0 +1,34 @@
+<!--begin::Aside Menu-->
+<div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
+  <div
+    id="kt_aside_menu"
+    class="aside-menu min-h-lg-800px"
+    [ngClass]="asideMenuCSSClasses"
+    data-menu-vertical="1"
+    [attr.data-menu-scroll]="asideMenuScroll"
+    [attr.data-menu-dropdown]="asideMenuDropdown"
+    data-menu-dropdown-timeout="500"
+  >
+    <!-- begin::Menu Nav -->
+    <ul class="menu-nav" [ngClass]="ulCSSClasses">
+
+      <li
+      class="menu-item"
+      aria-haspopup="true"
+      routerLinkActive="menu-item-active"
+    >
+      <a class="menu-link" routerLink="/manager-video" routerLinkActive="active">
+        <span
+          [inlineSVG]="'./assets/media/svg/icons/Design/Layers.svg'"
+          cacheSVG="true"
+          class="svg-icon menu-icon"
+        ></span>
+        <span class="menu-text" >Video cua toi</span>
+      </a>
+    </li>
+    </ul>
+    <!-- end::Menu Nav -->
+  </div>
+  <!--end::Menu Container-->
+</div>
+<!--end::Aside Menu-->
