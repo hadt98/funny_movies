@@ -63,7 +63,7 @@ RSpec.describe API::V1::Auth, type: :request do
         user2 = create(:user)
         stub_youtube_data
         video4 = create(:video, user: user2, created_at: 3.days.ago)
-        get_without_token("/api/v1/videos/public")
+        get_without_token("/api/v1/public/videos")
         expect(response.status).to eq(200)
         expect(json_body["total_count"]).to eq 4
         expect(json_body["data"][0]).to include(

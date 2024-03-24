@@ -1,34 +1,32 @@
 module API::V1
   class Videos < Grape::API
     helpers do
-      def authen_request
-        authenticate_request!
+      def paging(domain, page = 1, per_page = 10, order_by = 'created_at', order_dir = 'desc')
+        domain = domain.order("#{order_by} #{order_dir}").offset((page - 1) * per_page).limit(per_page)
+        {
+          total_count: domain.count,
+          data: domain
+        }
+
       end
     end
-
-    namespace :videos do
+    namespace :public do
       desc "get list videos public by all users"
       params do
         optional :per_page, type: Integer, default: 10
         optional :page, type: Integer, default: 1
       end
-      get "/public" do
+      get "/videos" do
         page = params[:page]
         per_page = params[:per_page]
-        order_by = 'created_at'
-        order_dir = 'desc'
+        videos = Video
+        paging(videos, page, per_page)
+      end
+    end
 
-        # Calculate total count
-        total_count = Video.count
-
-        # Fetch paginated records with ordering
-        videos = Video.order("#{order_by} #{order_dir}").offset((page - 1) * per_page).limit(per_page)
-
-        {
-          data: videos,
-          total_count: total_count
-        }
-
+    namespace :videos do
+      before_validation do
+        authenticate_request!
       end
 
       desc "get list videos by current user"
@@ -37,23 +35,12 @@ module API::V1
         optional :page, type: Integer, default: 1
       end
       get "/mine" do
-        authen_request
         declared_params = declared(params)
         page = declared_params[:page]
         per_page = declared_params[:per_page]
-        order_by = 'created_at'
-        order_dir = 'desc'
 
-        # Calculate total count
-        total_count = Video.where(user_id: @current_user[:id]).count
-
-        # Fetch paginated records with ordering
-        videos = Video.where(user_id: @current_user[:id]).order("#{order_by} #{order_dir}").offset((page - 1) * per_page).limit(per_page)
-        p videos
-        {
-          data: videos,
-          total_count: total_count
-        }
+        videos = Video.where(user_id: @current_user[:id])
+        paging(videos, page, per_page)
       end
 
       desc "create a video by link"
@@ -61,7 +48,7 @@ module API::V1
         requires :link, type: String, regexp: /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
       end
       post "" do
-        authen_request
+
         declared_params = declared(params, include_missing: false)
         video = Video.create!(link: declared_params[:link], user_id: @current_user[:id])
         raise_error_if_invalid!(video)
@@ -75,7 +62,7 @@ module API::V1
         requires :total, type: Integer
       end
       post ":id/add" do
-        authen_request
+
         declared_params = declared(params, include_missing: false)
         video = Video.where(id: declared_params[:id], user_id: @current_user[:id]).first
         if video.nil?
@@ -96,7 +83,7 @@ module API::V1
         requires :total, type: Integer
       end
       post ":id/remove" do
-        authen_request
+
         declared_params = declared(params, include_missing: false)
         video = Video.by_id(declared_params["id"]).by_owner(@current_user["id"])
         if video.nil?
