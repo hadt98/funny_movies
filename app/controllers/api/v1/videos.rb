@@ -4,9 +4,14 @@ module API::V1
       def paging(domain, page = 1, per_page = 10, order_by = 'created_at', order_dir = 'desc')
         domain = domain.order("#{order_by} #{order_dir}").offset((page - 1) * per_page).limit(per_page)
         data = ActiveModelSerializers::SerializableResource.new(domain, each_serializer: VideoSerializer)
+        total = domain.count
+        total_pages = (total.to_f / per_page).ceil
+        next_page = page < total_pages ? page + 1 : nil
         {
-          total_count: domain.count,
-          data: data
+          total_count: total,
+          data: data,
+          total_page: total_pages,
+          next_page: next_page
         }
 
       end
