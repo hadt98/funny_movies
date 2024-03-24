@@ -25,7 +25,7 @@ module API
 
           user = User.find_by_email(params[:email])
           error!("wrong password or email", 401) unless user&.authenticate(params[:password])
-          jwt_encode(user_id: user.id)
+          jwt_encode({ user_id: user.id, email: user.email })
         end
 
       end

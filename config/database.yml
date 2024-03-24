@@ -23,16 +23,15 @@ default: &default
 
 development:
   <<: *default
-#  database: invoiced_development
-  url: <%= ENV['DATABASE_URL']&.gsub('?', '_dev?') || 'postgresql://postgres:123123@localhost/invoiced_dev' %>
+  url: <%= ENV['DATABASE_URL']&.gsub('?', '_dev?') || 'postgresql://postgres:123123@localhost/funny_movies_dev' %>
 test: &test
-  url: <%= ENV['DATABASE_URL']&.gsub('?', '_test?') || 'postgresql://postgres:123123@localhost/invoiced_test' %>
+  url: <%= ENV['DATABASE_URL']&.gsub('?', '_test?') || 'postgresql://postgres:123123@localhost/funny_movies_test' %>
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
   # When left blank, PostgreSQL will use the default role. This is
   # the same name as the operating system user running Rails.
-  #username: invoiced
+  #username: funny_movies
 
   # The password associated with the PostgreSQL role (username).
   #password:
@@ -60,7 +59,7 @@ test: &test
 # Do not set this db to the same as development or production.
 #test:
 #  <<: *default
-#  database: invoiced_test
+#  database: funny_movies_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -84,6 +83,6 @@ test: &test
 #
 #production:
 #  <<: *default
-#  database: invoiced_production
-#  username: invoiced
+#  database: funny_movies_production
+#  username: funny_movies
 #  password: <%#= ENV["INVOICED_DATABASE_PASSWORD"] %>

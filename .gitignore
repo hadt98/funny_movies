@@ -31,3 +31,8 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+/.idea/vcs.xml
+/.idea/modules.xml
+/.idea/misc.xml
+/.idea/funny_movies.iml
+/fe/node_modules/

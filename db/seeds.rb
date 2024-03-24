@@ -4,6 +4,6 @@
 #
 # Example:
 #
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+%w[like dislike].each do |icon|
+  Icon.find_or_create_by!(code: icon, symbol: icon)
+end

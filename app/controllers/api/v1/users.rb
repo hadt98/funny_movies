@@ -6,6 +6,10 @@ module API
       end
 
       namespace :users do
+        desc "current info"
+        get "/me" do
+          @current_user
+        end
       end
     end
   end

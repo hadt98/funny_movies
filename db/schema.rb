@@ -14,14 +14,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_151048) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "contacts", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "icons", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -31,7 +23,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_151048) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "username"
     t.string "password_digest"
     t.string "email"
     t.datetime "created_at", null: false
@@ -39,20 +30,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_151048) do
   end
 
   create_table "video_icons", force: :cascade do |t|
-    t.decimal "video_id"
-    t.string "icon_code"
+    t.bigint "video_id"
+    t.string "code"
     t.string "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["video_id"], name: "index_video_icons_on_video_id"
   end
 
   create_table "videos", force: :cascade do |t|
     t.string "title"
-    t.string "#<Thread:0x000072e10b6efca8 run>"
+    t.bigint "user_id"
     t.string "description"
     t.string "source"
+    t.string "link"
+    t.string "video_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_videos_on_user_id"
   end
 
 end
