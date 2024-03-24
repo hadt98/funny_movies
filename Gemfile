@@ -36,9 +36,9 @@ gem "bootsnap", require: false
 gem "rack-cors"
 gem 'jwt', "~> 2.5"
 gem 'active_model_serializers', "~> 0.10.12"
-gem 'video_info'
 gem "grape"
 gem "grape-active_model_serializers"
+gem "google-api-client"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
