@@ -7,6 +7,7 @@ module API
         desc "register a user"
         params do
           requires :email, type: String
+          optional :full_name, type: String
           requires :password, type: String
         end
         post :register do

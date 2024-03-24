@@ -1,3 +1,3 @@
 class VideoIconSerializer < ActiveModel::Serializer
-  attributes :code, :count
+  attributes :code, :video_id, :user_id
 end

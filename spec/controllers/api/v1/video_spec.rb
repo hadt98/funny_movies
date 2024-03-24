@@ -63,7 +63,7 @@ RSpec.describe API::V1::Auth, type: :request do
         user2 = create(:user)
         stub_youtube_data
         video4 = create(:video, user: user2, created_at: 3.days.ago)
-        get_without_token("/api/v1/videos/public")
+        get_without_token("/api/v1/public/videos")
         expect(response.status).to eq(200)
         expect(json_body["total_count"]).to eq 4
         expect(json_body["data"][0]).to include(
@@ -119,6 +119,43 @@ RSpec.describe API::V1::Auth, type: :request do
         get_without_token("/api/v1/videos/mine")
         expect(response.status).to eq(401)
 
+      end
+    end
+
+  end
+
+  describe "POST /add_reaction" do
+    context "add reaction to video" do
+      it "return success" do
+        user = create(:user)
+        stub_youtube_data
+        video = create(:video, user: user)
+        post_with_token "/api/v1/videos/#{video["id"]}/add_reaction", body: { icon: 'like' }, user: user
+        expect(response.status).to eq(201)
+        expect(json_body["video_id"]).to eq video.id
+        expect(json_body["user_id"]).to eq user.id
+        expect(json_body["code"]).to eq 'like'
+
+      end
+    end
+    context "unauthenticated user" do
+      it "return error" do
+        user = create(:user)
+        stub_youtube_data
+        video = create(:video, user: user)
+        post_without_token "/api/v1/videos/#{video["id"]}/add_reaction", body: { icon: 'like' }
+        expect(response.status).to eq(401)
+
+      end
+    end
+
+    context "unsupported reaction" do
+      it "return error" do
+        user = create(:user)
+        stub_youtube_data
+        video = create(:video, user: user)
+        post_with_token "/api/v1/videos/#{video["id"]}/add_reaction", body: { icon: 'love' }, user: user
+        expect(response.status).to eq(400)
       end
     end
 
