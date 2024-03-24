@@ -1,5 +1,5 @@
 class VideoSerializer < ActiveModel::Serializer
-  attributes :id, :title, :description, :link, :posted_at, :owner
+  attributes :id, :title, :description, :link, :posted_at, :owner, :video_id
   def posted_at
     object.created_at
   end
