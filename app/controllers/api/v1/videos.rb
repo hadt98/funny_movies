@@ -46,13 +46,13 @@ module API::V1
 
       desc "get link youtube info"
       params do
-        requires :url, type: String, regexp: /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+        requires :link, type: String, regexp: /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
       end
       get "/youtube_info" do
         declared_params = declared(params, include_missing: false)
         youtube_client = YoutubeClient.new
 
-        data, ok = youtube_client.get_video_info_by_link(declared_params[:url])
+        data, ok = youtube_client.get_video_info_by_link(declared_params[:link])
         unless ok
           error!("invalid video", 400)
         end

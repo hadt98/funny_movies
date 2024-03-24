@@ -166,7 +166,7 @@ RSpec.describe API::V1::Auth, type: :request do
         user = create(:user)
         link = 'https://www.youtube.com/watch?v=99uabJJUFX4'
         stub_youtube_data
-        get_with_token("/api/v1/videos/youtube_info", user: user, params: {url: link})
+        get_with_token("/api/v1/videos/youtube_info", user: user, params: {link: link})
         expect(response.status).to eq(200)
         expect(json_body).to include(
                                           "title" => "title",
