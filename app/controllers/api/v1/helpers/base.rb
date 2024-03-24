@@ -5,7 +5,7 @@ module API
       include JsonWebToken
       def authenticate_request!
         token = request.headers["Authorization"] || request.headers["authorization"]
-        jwt = header.split(" ").last if token
+        jwt = token.split(" ").last if token
         decoded, ok = jwt_decode(jwt)
         unless ok
           if decoded.nil?
@@ -19,6 +19,7 @@ module API
         unless !!@current_user
           error!("invalid user", 401)
         end
+        @current_user
       end
 
       def raise_error_if_invalid!(model)
