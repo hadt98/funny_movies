@@ -76,8 +76,8 @@ RSpec.describe API::V1::Auth, type: :request do
 
       end
     end
-
   end
+
   describe "GET /mine" do
     context "get all videos public by current user" do
       it "return success" do
@@ -160,6 +160,23 @@ RSpec.describe API::V1::Auth, type: :request do
     end
 
   end
+  describe "GET /videos/youtube_info" do
+    context "get video from a link" do
+      it "return success" do
+        user = create(:user)
+        link = 'https://www.youtube.com/watch?v=99uabJJUFX4'
+        stub_youtube_data
+        get_with_token("/api/v1/videos/youtube_info", user: user, params: {url: link})
+        expect(response.status).to eq(200)
+        expect(json_body).to include(
+                                          "title" => "title",
+                                          "description" => "description"
+                                        )
+
+      end
+    end
+  end
+
 
   def stub_youtube_data(video_id: SecureRandom.uuid)
     data = [{

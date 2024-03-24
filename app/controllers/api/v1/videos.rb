@@ -10,6 +10,7 @@ module API::V1
 
       end
     end
+
     namespace :public do
       desc "get list videos public by all users"
       params do
@@ -41,6 +42,21 @@ module API::V1
 
         videos = Video.where(user_id: @current_user[:id])
         paging(videos, page, per_page)
+      end
+
+      desc "get link youtube info"
+      params do
+        requires :url, type: String, regexp: /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+      end
+      get "/youtube_info" do
+        declared_params = declared(params, include_missing: false)
+        youtube_client = YoutubeClient.new
+
+        data, ok = youtube_client.get_video_info_by_link(declared_params[:url])
+        unless ok
+          error!("invalid video", 400)
+        end
+        data
       end
 
       desc "create a video by link"
