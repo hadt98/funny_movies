@@ -43,6 +43,20 @@ module API::V1
         paging(videos, page, per_page)
       end
 
+      desc "get link youtube info"
+      params do
+        requires :url, type: String, regexp: /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+      end
+      get "/youtube_info" do
+        declared_params = declared(params, include_missing: false)
+        data, ok = Video.get_video(declared_params[:url])
+        unless ok
+          error!("invalid video", 400)
+        end
+        data
+      end
+
+
       desc "create a video by link"
       params do
         requires :link, type: String, regexp: /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/

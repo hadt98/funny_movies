@@ -24,6 +24,15 @@ class Video < ApplicationRecord
     end
   end
 
+  def get_video(link)
+    data, ok = youtube_client.get_video_info_by_link(link)
+
+    unless ok
+      return data, false
+    end
+    return data, ok
+  end
+
   def get_video_info
     data, ok = youtube_client.get_video_info_by_link(self.link)
 
