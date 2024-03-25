@@ -1,0 +1,19 @@
+<div class="card card-custom gutter-b">
+  <div *ngFor="let video of listVideos">
+    <div
+      style="
+        display: flex;
+        justify-content: space-around;
+        gap: 20px;
+        width: 80%;
+        margin: 0 auto;
+      "
+    >
+      <youtube-player videoId="{{ video.video_id }}"></youtube-player>
+      <div>
+        <p><strong>Title:</strong> {{ video.title }}</p>
+        <p><strong>Description:</strong> {{ video.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>

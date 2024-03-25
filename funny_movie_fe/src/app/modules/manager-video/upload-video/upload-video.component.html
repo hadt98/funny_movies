@@ -1,0 +1,110 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">Upload video</h3>
+    </div>
+    <!-- <div class="card-toolbar">
+            <button type="button" class="btn btn-primary">Nổi bật</button>
+        </div> -->
+  </div>
+  <div class="card-body">
+    <!--begin::Form group-->
+    <form
+      class="form"
+      [formGroup]="checkVideoUrlForm"
+      novalidate="novalidate"
+      id="checkVideoUrlFormId"
+      (ngSubmit)="checkVideoUrl()"
+    >
+      <div class="form-group wrapper" style="flex-direction: column">
+        <!-- <label class="font-size-h6 font-weight-bolder text-dark"
+          >Upload video</label
+        > -->
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <button
+              class="btn btn-outline-secondary dropdown-toggle"
+              type="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Youtube
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Youtube</a>
+            </div>
+          </div>
+          <input
+            type="text"
+            class="form-control form-control-solid"
+            placeholder="Please paste your youtube link"
+            aria-label="Please paste your youtube link"
+            aria-describedby="basic-addon2"
+            name="link"
+            formControlName="link"
+            autocomplete="off"
+            [ngClass]="{
+              'is-invalid': checkVideoUrlForm.controls['link'].invalid
+            }"
+          />
+          <div class="input-group-append">
+            <button class="input-group-text" type="submit" id="basic-addon2">
+              Load video
+            </button>
+          </div>
+        </div>
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Video link is required',
+            control: checkVideoUrlForm.controls['link']
+          }"
+        ></ng-container>
+      </div>
+    </form>
+    <!--end::Form group-->
+    <form [formGroup]="createVideoForm"  *ngIf="this.createVideoForm.get('video_id')?.value">
+      <div class="row mt-5" >
+          <div class="col-6">
+            <youtube-player style="height: 400px;" videoId="{{this.createVideoForm.get('video_id')?.value}}"></youtube-player>
+          </div>
+
+          <div class="col-6">
+            <div class="form-group">
+              <label>title</label>
+              <input readonly formControlName="title" class="form-control" />
+            </div>
+
+
+            <div class="form-group">
+              <label>description</label>
+              <textarea readonly formControlName="description" class="form-control" rows="5"></textarea>
+            </div>
+            <a class="btn btn-primary" (click)="onSubmit()">
+              Submit
+            </a>
+          </div>
+
+      </div>
+  </form>
+  </div>
+</div>
+<ng-template
+  #formError
+  let-control="control"
+  let-message="message"
+  let-validation="validation"
+>
+  <ng-container
+    *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+  >
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block" style="color: red">
+        {{ message }}
+      </div>
+    </div>
+  </ng-container>
+</ng-template>
