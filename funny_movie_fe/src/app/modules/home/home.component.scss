@@ -1,0 +1,61 @@
+.video-content {
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between;
+    &--title {
+        h2 {
+            color: #2d3748;
+            line-height: 1.4;
+            letter-spacing: -.5px;
+        }
+        span.title {
+            color: #718096;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.43;
+        }
+
+        span.email {
+            color: #2d3748;
+        }
+    }
+    &--description {
+        flex: 1;
+        span {
+            color: #718096;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.43;
+        }
+    }
+
+    &--footer {
+        display: flex;
+        justify-content: space-between;
+        .left {
+            .reaction {
+                display: flex;
+                justify-content: center;
+                flex-direction: row;
+                align-items: center;
+                &:not(first-child) {
+                    margin-left: 10px;
+                }
+                span:not(first-child) {
+                    margin-left: 5px;
+                }
+                cursor: pointer;
+            }
+            
+            .like {
+
+            }
+
+            .dislike {
+                svg {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+    }
+}
