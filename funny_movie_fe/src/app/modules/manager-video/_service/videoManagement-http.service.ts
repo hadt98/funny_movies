@@ -70,7 +70,7 @@ export class VideoManagementHttpService {
       page,
       per_page: pageSize
     };
-    return this.http.get<any>(`${BACKEND_API}/api/v1/public/videos`, {
+    return this.http.get<any>(`${BACKEND_API}/api/v1/videos/mine`, {
       headers: httpHeaders,
       params,
     });

@@ -31,26 +31,26 @@
 
     <!--begin::Form group-->
     <div class="form-group">
-      <label class="font-size-h6 font-weight-bolder text-dark">Fullname</label>
-      <input
-        class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
-        type="text"
-        name="fullName"
-        formControlName="fullName"
-        placeholder="Fullname"
-        autocomplete="off"
-        [ngClass]="{
-          'is-invalid': registrationForm.controls['fullName'].invalid
-        }"
-      />
-      <ng-container
-        [ngTemplateOutlet]="formError"
-        [ngTemplateOutletContext]="{
-          validation: 'required',
-          message: 'Fullname is required',
-          control: registrationForm.controls['fullName']
-        }"
-      ></ng-container>
+<!--      <label class="font-size-h6 font-weight-bolder text-dark">Fullname</label>-->
+<!--      <input-->
+<!--        class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"-->
+<!--        type="text"-->
+<!--        name="fullName"-->
+<!--        formControlName="fullName"-->
+<!--        placeholder="Fullname"-->
+<!--        autocomplete="off"-->
+<!--        [ngClass]="{-->
+<!--          'is-invalid': registrationForm.controls['fullName'].invalid-->
+<!--        }"-->
+<!--      />-->
+<!--      <ng-container-->
+<!--        [ngTemplateOutlet]="formError"-->
+<!--        [ngTemplateOutletContext]="{-->
+<!--          validation: 'required',-->
+<!--          message: 'Fullname is required',-->
+<!--          control: registrationForm.controls['fullName']-->
+<!--        }"-->
+<!--      ></ng-container>-->
       <ng-container
         [ngTemplateOutlet]="formError"
         [ngTemplateOutletContext]="{

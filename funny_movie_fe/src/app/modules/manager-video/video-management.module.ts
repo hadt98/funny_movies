@@ -6,6 +6,7 @@ import { ManageVideoRoutingModule } from "./video-management-routing.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { YouTubePlayerModule } from "@angular/youtube-player";
+import {InfiniteScrollModule} from "ngx-infinite-scroll";
 @NgModule({
   declarations: [ListVideoComponent, UploadVideoComponent],
   imports: [
@@ -15,6 +16,7 @@ import { YouTubePlayerModule } from "@angular/youtube-player";
     ReactiveFormsModule,
     HttpClientModule,
     YouTubePlayerModule,
+    InfiniteScrollModule,
   ],
 })
 export class VideoManagementModule {}
