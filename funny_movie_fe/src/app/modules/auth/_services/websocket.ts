@@ -17,7 +17,8 @@ export class WebsocketService {
     private socket$: WebSocketSubject<any>;
     private user$: UserModel;
     private socket: WebSocket;
-    constructor(private auth: AuthService, private toast: ToastrService) {
+
+    constructor(private auth: AuthService, private toast: ToastrService, private window: Window) {
         console.log('websocket');
         // this.socket$ = webSocket('wss://your-websocket-server-url');
         this.auth.currentUserSubject.subscribe(user => {
@@ -31,15 +32,21 @@ export class WebsocketService {
         });
     }
 
+    private getWsUrl() {
+        if (environment.wsUrl) {
+            return environment.wsUrl;
+        }
+        return window.location.origin.replace(/http/g, 'ws');
+    }
+
     public connect() {
-        if (!this.user$ || this.socket){
+        if (!this.user$ || this.socket) {
             return;
         }
         console.log('connect');
         // this.closeConnection();
         const token = this.auth.getAuthFromLocalStorage().token;
-        const wsUrl = `${environment.wsUrl}?token=${token}`;
-
+        const wsUrl = `${this.getWsUrl()}/cable?token=${token}`;
         this.socket = new WebSocket(wsUrl);
 
         this.socket.onopen = (event) => {
@@ -79,9 +86,9 @@ export class WebsocketService {
             console.log('identifier', identifier);
             console.log('message', message);
             if (identifier.channel === 'AlertsChannel') {
-                if (message.owner !== this.user$.email){
-                    this.toast.info(`user: ${message.owner} create new video: ` + message.title);
-                }
+                // if (message.owner !== this.user$.email){
+                this.toast.info(`user: ${message.owner} create new video: ` + message.title);
+                // }
             }
         }
     }

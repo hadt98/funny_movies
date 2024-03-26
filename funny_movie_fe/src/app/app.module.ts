@@ -44,6 +44,7 @@ function appInitializer(authService: AuthService) {
     ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [
+    {provide: Window, useValue: window},
     {
       provide: APP_INITIALIZER,
       useFactory: appInitializer,
