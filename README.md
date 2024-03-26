@@ -86,5 +86,31 @@ Access http://localhost:4200 to gain view the site
     - Then you could share your own Youtube video links and receive notification from other users when they upload a video
 ```
 
-## run local with docker
+## config with nginx 
+```
+server {
+listen 80;
+
+    server_name hadt.site;
+    location / {
+        root /var/www/funny_movie_fe;
+        try_files $uri $uri/ /index.html;
+    }
+
+    location /api {
+        proxy_pass http://localhost:3000/api;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Port $server_port;
+        proxy_set_header Host $host;
+    }
+    location /cable {
+        proxy_pass http://localhost:3000/cable;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+    }
+}
+```
 

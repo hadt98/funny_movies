@@ -8,7 +8,7 @@ export const environment = {
   USERDATA_KEY: "authf649fc9a5f55",
   isMockEnabled: true,
   apiUrl: "http://127.0.0.1:3000",
-  wsUrl: 'ws://127.0.0.1:3000/cable',
+  wsUrl: 'ws://127.0.0.1:3000',
 };
 
 /*
