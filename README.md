@@ -18,8 +18,8 @@ and get notification about new uploaded video from other users.
     sudo systemctl start postgresql.service
     
     //install rvm and ruby 3.1.2
-    curl -L https://get.rvm.io | bash #install rvm
-    echo "source /etc/profile.d/rvm.sh" > $HOME/.bashrc
+    \curl -L https://get.rvm.io | bash #install rvm
+    `echo "source $HOME/rvm.sh" >> $HOME/.bashrc`
    
     source $HOME/.bashrc
     rvm install 3.1.2
