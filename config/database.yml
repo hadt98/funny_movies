@@ -81,8 +81,9 @@ test: &test
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
-#production:
-#  <<: *default
+production:
+  <<: *default
 #  database: funny_movies_production
+  url:  <%= ENV['DATABASE_URL']&.gsub('?', '_prod?') || 'postgresql://postgres:123123@localhost/funny_movie_prod' %>
 #  username: funny_movies
 #  password: <%#= ENV["INVOICED_DATABASE_PASSWORD"] %>
