@@ -35,6 +35,9 @@ module FunnyMovies
     #     resource '*', :headers => :any, :method => [:get, :put, :patch, :post, :delete]
     #   end
     # end
+    if ENV["FUNNY_MOVIE_DOMAIN"]
+      config.hosts << ENV["FUNNY_MOVIE_DOMAIN"]
+    end
 
   end
 end
