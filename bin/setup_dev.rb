@@ -14,7 +14,6 @@ class SetupDev
       configure
       bundle_and_prepare_db_and_npm_api
       wait
-      init_data
     end
   
     def quit
@@ -79,10 +78,7 @@ class SetupDev
         system "spring rails db:setup db:test:prepare"
       end
     end
-  
-    def init_data
-      system "spring rails r dev-seeds/test_admin_user.rb"
-    end
+
   
     def pid_alive?(pid)
       Process.getpgid(pid)

@@ -14,6 +14,7 @@ and get notification about new uploaded video from other users.
 ```
     //install psql
     sudo apt install postgresql postgresql-contrib
+    sudo apt install libpq-dev
     sudo systemctl start postgresql.service
     
     //install rvm and ruby 3.1.2
@@ -45,6 +46,7 @@ and get notification about new uploaded video from other users.
 ### 2. setup dependencies and databases
 
 ```
+    chmod +x ./bin/setup_dev.rb
     ./bin/setup_dev
 ``` 
 
