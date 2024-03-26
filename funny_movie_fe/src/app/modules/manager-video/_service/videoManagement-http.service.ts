@@ -4,8 +4,6 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { VideoDetail } from './videoManagement.service';
-const YOUTUBE_API = `${environment.YOUTUBE_API}`;
-const YOUTUBE_API_KEY = `${environment.YOUTUBE_API_KEY}`;
 const BACKEND_API = `${environment.apiUrl}`;
 @Injectable({
   providedIn: 'root',

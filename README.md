@@ -29,7 +29,7 @@ and get notification about new uploaded video from other users.
 #### evn require
 
 ```
-    echo "export YOUTUBE_API='xxxxxxxx'" > $HOME/.bashrc
+    echo "export YOUTUBE_API='xxxxxxxx'" >> $HOME/.bashrc
 
 ```
 
@@ -46,9 +46,16 @@ and get notification about new uploaded video from other users.
 ### 2. setup dependencies and databases
 
 ```
-    chmod +x ./bin/setup_dev.rb
-    ./bin/setup_dev
-``` 
+    be 
+    bundle install
+    rails db:setup
+    rails db:migrate
+```
+
+```
+    fe
+    npm install
+```
 
 ### 3. start project
 
@@ -57,7 +64,9 @@ and get notification about new uploaded video from other users.
     rails s
 
     //run fe
-    cd funny_movie_fe && npm start
+    
+    cd funny_movie_fe 
+    npm start
 ```
 
 That will boot api on port 3000, btc frontend on port 4200

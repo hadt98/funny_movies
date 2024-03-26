@@ -35,9 +35,12 @@ module FunnyMovies
     #     resource '*', :headers => :any, :method => [:get, :put, :patch, :post, :delete]
     #   end
     # end
-    if ENV["FUNNY_MOVIE_DOMAIN"]
-      config.hosts << ENV["FUNNY_MOVIE_DOMAIN"]
-    end
+    Rails.application.config.hosts = [
+      IPAddr.new("0.0.0.0/0"), # All IPv4 addresses.
+      IPAddr.new("::/0"), # All IPv6 addresses.
+      "localhost", # The localhost reserved domain.
+      ENV["FUNNY_MOVIE_DOMAIN"] # Additional comma-separated hosts for development.
+    ]
 
   end
 end
