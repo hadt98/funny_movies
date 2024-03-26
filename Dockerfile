@@ -2,6 +2,8 @@
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
 ARG RUBY_VERSION=3.1.2
+ARG YOUTUBE_KEY
+
 FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
 
 # Rails app lives here

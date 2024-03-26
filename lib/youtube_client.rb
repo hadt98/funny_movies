@@ -5,7 +5,7 @@ class YoutubeClient
 
   def youtube_service
     youtube = Google::Apis::YoutubeV3::YouTubeService.new
-    youtube.key = "AIzaSyAbOzhelLQv-HKWWKdJIN1VVzKumDeT99A"
+    youtube.key = ENV["YOUTUBE_API"]
     return youtube
   end
 
