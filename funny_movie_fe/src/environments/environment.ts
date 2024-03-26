@@ -8,8 +8,7 @@ export const environment = {
   USERDATA_KEY: "authf649fc9a5f55",
   isMockEnabled: true,
   apiUrl: "http://127.0.0.1:3000",
-  YOUTUBE_API_KEY: "AIzaSyAbOzhelLQv-HKWWKdJIN1VVzKumDeT99A",
-  YOUTUBE_API: "https://youtube.googleapis.com/youtube/v3/videos",
+  wsUrl: 'ws://127.0.0.1:3000/cable',
 };
 
 /*

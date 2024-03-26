@@ -7,6 +7,7 @@ import {
 import {Router, NavigationEnd} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {TranslationService} from './modules/i18n/translation.service';
+import {WebsocketService} from "./modules/auth/_services/websocket";
 // language list
 import {locale as enLang} from './modules/i18n/vocabs/en';
 import {locale as chLang} from './modules/i18n/vocabs/ch';
@@ -31,8 +32,10 @@ export class AppComponent implements OnInit, OnDestroy {
     private translationService: TranslationService,
     private splashScreenService: SplashScreenService,
     private router: Router,
-    private tableService: TableExtendedService
+    private tableService: TableExtendedService,
+    private websocketService: WebsocketService
   ) {
+
     // register translations
     this.translationService.loadTranslations(
       enLang,
@@ -45,6 +48,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.websocketService.connect();
     const routerSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         // clear filtration paginations and others
@@ -67,5 +71,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.unsubscribe.forEach((sb) => sb.unsubscribe());
+    this.websocketService.closeConnection();
   }
 }
