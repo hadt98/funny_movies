@@ -86,9 +86,9 @@ export class WebsocketService {
             console.log('identifier', identifier);
             console.log('message', message);
             if (identifier.channel === 'AlertsChannel') {
-                // if (message.owner !== this.user$.email){
-                this.toast.info(`user: ${message.owner} create new video: ` + message.title);
-                // }
+                if (message.owner !== this.user$.email){
+                    this.toast.info(`user: ${message.owner} create new video: ` + message.title);
+                }
             }
         }
     }
