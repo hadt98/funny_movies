@@ -83,7 +83,7 @@ Access http://localhost:4200 to gain view the site
     - Go to http://localhost:4200/auth/login to register/login 
     - Then you could share your own Youtube video links and receive notification from other users when they upload a video
 
-[![video demo](./assets/funny_movies_thumnail.png)](./assets/funny_movies_demo.webm)
+![video demo](./assets/funny_movies_gif.gif)
 
 
 ## config with nginx 
