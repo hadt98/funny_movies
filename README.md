@@ -1,9 +1,8 @@
 # README
 
-```
 This is a funny movies website where user can share Youtube videos. They can view list published videos, could share their own 
 and get notification about new uploaded video from other users.
-```
+
 
 ## Run local
 
@@ -80,11 +79,12 @@ Access http://localhost:4200 to gain view the site
 
 ### 5. usages
 
-```
     - Go to http://localhost:4200/home to see other published videos
     - Go to http://localhost:4200/auth/login to register/login 
     - Then you could share your own Youtube video links and receive notification from other users when they upload a video
-```
+
+[![video demo](./assets/funny_movies_thumnail.png)](./assets/funny_movies_demo.webm)
+
 
 ## config with nginx 
 ```
@@ -113,4 +113,6 @@ listen 80;
     }
 }
 ```
+
+
 
