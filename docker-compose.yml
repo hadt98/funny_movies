@@ -1,0 +1,38 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "postgresql://postgres:123123@localhost:5432/funny_movies"
+    volumes:
+      - .:/app
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend.yml
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./frontend:/app/frontend
+    depends_on:
+      - backend
+  db:
+    image: postgres:latest
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: funny_movies
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:
+
+

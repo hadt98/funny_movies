@@ -1,0 +1,11 @@
+FROM node:16 AS builder
+
+WORKDIR /
+
+COPY funny_movie_fe/package.json ./
+COPY funny_movie_fe/package-lock.json ./
+
+RUN npm install -g @angular/cli
+RUN npm install --force
+
+CMD ["ng", "serve", "--host", "0.0.0.0"]
